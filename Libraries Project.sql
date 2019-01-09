@@ -1,52 +1,50 @@
 /* BRANCH TBL CREATIONS */
 
 CREATE TABLE tblLibraryBranch (
-	clmBranchID INT NOT NULL IDENTITY (1,1),
+	clmBranchID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	clmBranchName VARCHAR(30) , 
 	clmBranchAddress VARCHAR(50) ,
-	Primary KEY (clmBranchID)
+	
 );
 
 
 CREATE TABLE tblPublisher  (
-	clmPublisherName VARCHAR(30) NOT NULL,
-	clmAddress VARCHAR (50) ,
-	clmPhone INT,
-	PRIMARY KEY (clmPublisherName)
+	clmPublisherName KEY VARCHAR(30) PRIMARY NOT NULL,
+	clmAddress VARCHAR (50),
+	clmPhone VARCHAR(15),
 );
 
 
 CREATE TABLE tblBooks (
-	clmBookID INT NOT NULL IDENTITY (1,1),
+	clmBookID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	clmTitle VARCHAR(30),
-	clmPublisherName VARCHAR(30), 
-	Primary Key (clmBookID)
+	clmPublisherName VARCHAR(30) FOREIGN KEY REFERENCES tblPublisher(clmPublisherName) NOT NULL, 
 );
 
 
 CREATE TABLE tblBookAuthors (
 	clmAuthorName VARCHAR(30),
-	clmBookID INT NOT NULL
+	clmBookID INT FOREIGN KEY REFERENCES tblBooks(clmBookID) NOT NULL,
 );
 
 
 CREATE TABLE tblBookCopies (
-	clmBookID INT NOT NULL,
-	clmBranchID INT NOT NULL,
+	clmBookID INT FOREIGN KEY REFERENCES tblBooks(clmBookID) NOT NULL,
+	clmBranchID INT FOREIGN KEY REFERENCES tblLibraryBranch(clmBranchID) NOT NULL,
 	clmNumberOfCopies INT
 );
 
 
 CREATE TABLE tblBookLoans (
-	clmBookID INT NOT NULL,
-	clmBranchID INT NOT NULL,
-	clmCardNo INT,
+	clmBookID INT FOREIGN KEY REFERENCES tblBooks(clmBookID) NOT NULL,
+	clmBranchID INT FOREIGN KEY REFERENCES tblLibraryBranch(clmBranchID) NOT NULL,
+	clmCardNo INT FOREIGN KEY REFERENCES tblBorrower(clmCardNo) NOT NULL,
 	clmDateOut DATE,
 	clmDateDue DATE,
 );
 
 CREATE TABLE tblBorrower (
-	clmCardNo INT NOT NULL IDENTITY (1,1),
+	clmCardNo INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	clmName VARCHAR(30),
 	clmAddress VARCHAR(50), 
 	clmPhone VARCHAR(15)
@@ -62,6 +60,7 @@ INSERT INTO tblLibraryBranch
 	('Central'),
 	('Hialeah'),
 	('Miami Lakes');
+
 INSERT INTO tblLibraryBranch
 	(clmBranchAddress)
 	VALUES
@@ -73,11 +72,21 @@ INSERT INTO tblLibraryBranch
 
 INSERT INTO tblPublisher	
 	(clmPublisherName)
-	VALUES
+	VALUES 
 	('Clear House'),
 	('Industry'),
 	('Hamilton'),
 	('Wash Post');
+
+INSERT INTO tblPublisher
+	(clmAddress)
+	VALUES
+	('')
+
+INSERT tblPublisher
+	(clmPhone)
+	('')
+
 
 INSERT INTO tblBooks	
 	(clmTitle)
@@ -169,7 +178,7 @@ INSERT INTO tblBookLoans (
 
 	
 INSERT INTO tblBookLoans (
-	clmDatein)
+	clmDateDue)
 	VALUES
 	('6/10/18'),
 	('10/16/18'),
@@ -203,6 +212,42 @@ INSERT INTO tblBookLoans (
 	('3/16/11'),
 	('7/18/15');
 
+
+INSERT INTO tblBorrower
+	(clmName)
+	VALUES
+	('John Jacob'),
+	('Naheilam Jean'),
+	('Rick Winchester'),
+	('Amy Amethyst'),
+	('Amelia Airheart'),
+	('Ugandan Pearson'),
+	('Pot Richee'),
+	('Jack Milchen');
+
+INSERT INTO tblBorrower
+	(clmAddress)
+	VALUES
+	('11 S St Andrews st'),
+	('769 W 81st st'),
+	('112 e 55th st'),
+	('North Andrews'),
+	('1 West 59 st'),
+	('89 sw 65th ave'),
+	('901 55th st'),
+	('6533 n Foreign Ave');
+
+INSERT INTO tblBorrower
+	(clmPhone)
+	VALUES
+	('502-112-5896'),
+	('596-392-6820'),
+	('328-294-9703'),
+	('289-693-2039'),
+	('674-582-8935'),
+	('901-462-3523'),
+	('245-352-9685'),
+	('895-384-7834');
 
 /* JOINS  */
 
@@ -299,5 +344,3 @@ SELECT clmBranchName
 	FROM tblLibraryBranch
 	WHERE clmBranchName='Central'
 END
-
-
