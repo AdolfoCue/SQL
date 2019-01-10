@@ -9,7 +9,7 @@ CREATE TABLE tblLibraryBranch (
 
 
 CREATE TABLE tblPublisher  (
-	clmPublisherName KEY VARCHAR(30) PRIMARY NOT NULL,
+	clmPublisherName VARCHAR(30) PRIMARY KEY NOT NULL,
 	clmAddress VARCHAR (50),
 	clmPhone VARCHAR(15),
 );
@@ -54,38 +54,21 @@ CREATE TABLE tblBorrower (
 /* INSERTS  */
 
 INSERT INTO tblLibraryBranch
-	(clmBranchName)
+	(clmBranchName, clmBranchAddress)
 	VALUES
-	('Sharpstown'),
-	('Central'),
-	('Hialeah'),
-	('Miami Lakes');
-
-INSERT INTO tblLibraryBranch
-	(clmBranchAddress)
-	VALUES
-	('123 N 1st st'),
-	('789 E 6th st'),
-	('621 NE 5th st'),
-	('159 SE 6th st');
+	('Sharpstown', '123 N 1st st'),
+	('Central', '789 E 6th st'),
+	('Hialeah', '621 NE 5th st'),
+	('Miami Lakes', '159 SE 6th st');
 
 
 INSERT INTO tblPublisher	
-	(clmPublisherName)
+	(clmPublisherName, clmAddress, clmPhone)
 	VALUES 
-	('Clear House'),
-	('Industry'),
-	('Hamilton'),
-	('Wash Post');
-
-INSERT INTO tblPublisher
-	(clmAddress)
-	VALUES
-	('')
-
-INSERT tblPublisher
-	(clmPhone)
-	('')
+	('Clear House', '689 NE 55TH ST', '789-473-9375'),
+	('Industry', '2088 n 89TH ST', '395-472-8762'),
+	('Hamilton', '2 N 65TH ST', '509-372-4872'),
+	('Wash Post', '9 NW UGANDA ST', '507-592-8501');
 
 
 INSERT INTO tblBooks	
@@ -154,64 +137,34 @@ INSERT INTO tblBookCopies (
 
 
 INSERT INTO tblBookLoans (
-	clmDateOut)
+	clmDateOut, clmDateDue)
 	VALUES
-	('5/6/15'),
-	('9/1/14'),
-	('10/12/12'),
-	('11/13/12'),
-	('1/18/18'),
-	('1/22/18'),
-	('1/17/16'),
-	('4/16/16'),
-	('12/15/15'),
-	('6/19/18'),
-	('5/7/15'),
-	('9/2/14'),
-	('10/11/12'),
-	('11/12/12'),
-	('1/17/18'),
-	('1/21/18'),
-	('1/19/16'),
-	('4/17/16'),
-	('12/16/15');
-
+	('5/6/15', '6/10/18'),
+	('9/1/14', '10/16/18'),
+	('10/12/12','9/1/18'),
+	('11/13/12', '5/4/18'),
+	('1/18/18', '6/10/18'),
+	('1/22/18', '10/16/18'),
+	('1/17/16','9/1/14'),
+	('4/16/16', '5/4/18'),
+	('12/15/15', '9/1/14'),
+	('6/19/18', '6/10/18'),
+	('5/7/15', '5/4/18'),
+	('9/2/14', '1/22/18'),
+	('10/11/12', '5/6/15'),
+	('11/12/12', '10/16/18'),
+	('1/17/18', '11/12/12'),
+	('1/21/18', '6/12/18'),
+	('1/19/16', '1/26/18'),
+	('4/17/16', '9/9/18'),
+	('12/16/15', '4/18/16');
+	('12/31/15', '6/30/18'),
+	('12/31/15', '10/19/18'),
+	('3/16/11', '10/19/18'),
+	('7/18/15', '5/14/18'),
+	('10/11/12', '5/6/15'),	
+	('4/16/16', '5/4/18');
 	
-INSERT INTO tblBookLoans (
-	clmDateDue)
-	VALUES
-	('6/10/18'),
-	('10/16/18'),
-	('9/1/18'),
-	('5/4/18'),
-	('3/2/11'),
-	('7/15/15'),
-	('9/9/18'),
-	('9/3/14'),
-	('10/17/12'),
-	('11/12/12'),
-	('1/19/18'),
-	('1/26/18'),
-	('1/10/16'),
-	('4/18/16'),
-	('12/10/15'),
-	('6/12/18'),
-	('5/19/15'),
-	('9/18/14'),
-	('10/22/12'),
-	('11/18/12'),
-	('1/10/18'),
-	('1/25/18'),
-	('1/29/16'),
-	('4/30/16'),
-	('12/31/15'),
-	('6/30/18'),
-	('10/19/18'),
-	('9/11/18'),
-	('5/14/18'),
-	('3/16/11'),
-	('7/18/15');
-
 
 INSERT INTO tblBorrower
 	(clmName)
@@ -226,28 +179,17 @@ INSERT INTO tblBorrower
 	('Jack Milchen');
 
 INSERT INTO tblBorrower
-	(clmAddress)
+	(clmAddress, clmPhone)
 	VALUES
-	('11 S St Andrews st'),
-	('769 W 81st st'),
-	('112 e 55th st'),
-	('North Andrews'),
-	('1 West 59 st'),
-	('89 sw 65th ave'),
-	('901 55th st'),
-	('6533 n Foreign Ave');
+	('11 S St Andrews st', '502-112-5896'),
+	('769 W 81st st', '596-392-6820'),
+	('112 e 55th st', '328-294-9703'),
+	('North Andrews', '289-693-2039'),
+	('1 West 59 st', '674-582-8935'),
+	('89 sw 65th ave', '901-462-3523'),
+	('901 55th st', '245-352-9685'),
+	('6533 n Foreign Ave', '895-384-7834');
 
-INSERT INTO tblBorrower
-	(clmPhone)
-	VALUES
-	('502-112-5896'),
-	('596-392-6820'),
-	('328-294-9703'),
-	('289-693-2039'),
-	('674-582-8935'),
-	('901-462-3523'),
-	('245-352-9685'),
-	('895-384-7834');
 
 /* JOINS  */
 
